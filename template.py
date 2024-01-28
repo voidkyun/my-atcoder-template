@@ -1,4 +1,4 @@
-import sys,math,itertools,re,numpy,string
+import sys,math,itertools,re,numpy,string,heapq
 
 def int_line_input(): return map(int,input().split())
 def int_list_input(n:int):
@@ -73,20 +73,17 @@ class WeightedGraph:
 	def dijkstra(self,s:int,t=None):
 		result=[math.inf for _ in range(self.vertices+1)]
 		result[s]=0
-		while(True):
-			min_cost=math.inf
-			for i in range(1,self.vertices+1):
-				if not(self.status[i]) and result[i]<=min_cost:
-					view=i
-					min_cost=result[i]
+		queue=[]
+		heapq.heapify(queue)
+		heapq.heappush(queue,(0,1))
+		while(len(queue)>0):
+			cost,view=heapq.heappop(queue)
 			self.status[view]=True
-			for i in self.graph[view]:
-				if not(self.status[i[0]]):
-					result[i[0]]=min(result[view]+i[1],result[i[0]])
-			if t is None:
-				if not False in self.status[1:]:
-					break
-			else:
+			for i,w in self.graph[view]:
+				if not(self.status[i]) and cost+w<result[i]:
+					result[i]=cost+w
+					heapq.heappush(queue,(cost+w,i))
+			if t is not None:
 				if self.status[t]:
 					break
 		return(result)
