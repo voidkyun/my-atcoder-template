@@ -1,4 +1,4 @@
-import sys,math,itertools,re,numpy,string,heapq
+import sys,math,itertools,re,numpy,string,heapq,collections
 
 def int_line_input(): return map(int,input().split())
 def int_list_input(n:int):
@@ -39,6 +39,33 @@ class UnweightedGraph:
 			self.passed.append(n)
 			for i in self.graph[n]:
 				self.dfs(i,False,False)
+	def enumerate_long_paths(self,s:int):
+		status=[False for _ in range(self.vertices+1)]
+		path=collections.deque()
+		path.append(s)
+		status[s]=True
+		class long_paths_result:
+			def __init__(self) -> None:
+				self.cnt=0
+				self.paths=[]
+				self.status=[]
+		result=long_paths_result()
+		def search(self:UnweightedGraph,n:int,status,path,result:long_paths_result):
+			para=False
+			for i in self.graph[n]:
+				if not status[i]:
+					para=True
+					status[i]=True
+					path.append(i)
+					search(self,i,status,path,result)
+					status[i]=False
+					path.pop()
+			if not para:
+				result.cnt+=1
+				result.paths.append(list(path))
+				result.status.append(status.copy())
+		search(self,s,status,path,result)
+		return result
 	def connected_components(self):
 		components=[]
 		for i in range(1,self.vertices+1):
