@@ -4,10 +4,8 @@ def int_line_input(): return map(int,input().split())
 def int_list_input(n:int):
 	li=[int_line_input() for _ in range(n)]
 	return [[0]+list(i) for i in zip(*li)]
-def int_grid_input(h:int,w:int,n:int):
-	for _ in range(n): yield [[0]*(w+2)]+[[0]+list(map(int,input().split()))+[0] for _ in range(h)]+[[0]*(w+2)]
-def str_grid_input(h:int,w:int,n:int,t:str):
-	for _ in range(n): yield [t*(w+2)]+[t+input()+t for _ in range(h)]+[t*(w+2)]
+def int_grid_input(h:int,w:int,edge=0): return [[edge]*(w+2)]+[[edge]+list(map(int,input().split()))+[edge] for _ in range(h)]+[[edge]*(w+2)]
+def str_grid_input(h:int,w:int,edge='#'): return [edge*(w+2)]+[edge+input()+edge for _ in range(h)]+[edge*(w+2)]
 def unweighted_graph_input(n,m,directed=False):
 	g=UnweightedGraph(n)
 	for _ in range(m):
