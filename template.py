@@ -1,5 +1,7 @@
 import sys,math,itertools,re,numpy,string,heapq,collections
 
+sys.setrecursionlimit(10**9)
+
 def int_line_input(): return map(int,input().split())
 def int_list_input(n:int):
 	li=[int_line_input() for _ in range(n)]
@@ -24,6 +26,12 @@ def weighted_graph_input(n,m,directed=False):
 	for _ in range(m):
 		g.add(*int_line_input(),directed)
 	return g
+
+def gcd(a:int,b:int):
+	if b==0:
+		return a
+	else:
+		return gcd(b,a%b)
 
 class UnweightedGraph:
 	def __init__(self,vertices:int) -> None:
@@ -120,3 +128,4 @@ class WeightedGraph:
 				if self.status[t]:
 					break
 		return(result)
+
