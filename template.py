@@ -46,7 +46,6 @@ def prime_factorize(n:int):
 			result[cnt-1][1]+=1
 	return result if n==1 else result+[[n,1]]
 
-
 class UnweightedGraph:
 	def __init__(self,vertices:int) -> None:
 		self.vertices=vertices
@@ -208,3 +207,4 @@ class StringGrid:
 			self.dfs(i,j+1,False,False)
 			self.dfs(i+1,j,False,False)
 			self.dfs(i,j-1,False,False)
+
