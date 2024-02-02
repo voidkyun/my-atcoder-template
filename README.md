@@ -59,4 +59,4 @@ n=12のとき　[[2,2],[3,1]]
 ### method
 - mazeify　グリッドを迷路として定義する。塀となる文字列と道となる文字列を指定する。
 - bfs　特定のマスから幅優先探索を行う。各マスへの最短経路のリストを返す。StringGrid.statusに結果を代入する。
-- dfs　特定のマスから深さ優先探索を行う。StringGrid.statusに結果を代入する。StringGrid.passedには通った順に頂点の番号が代入される。
+- dfs　特定のマスから深さ優先探索を行う。StringGrid.statusに結果を代入する。StringGrid.passedには通った順にマスの番号が代入される。
