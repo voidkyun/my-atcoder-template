@@ -34,6 +34,18 @@ def gcd(a:int,b:int):
 		return a
 	else:
 		return gcd(b,a%b)
+def prime_factorize(n:int):
+	result=[]
+	cnt=0
+	for i in range(2,int(pow(n,0.5)+1)):
+		if n%i==0:
+			result.append([i,0])
+			cnt+=1
+		while(n%i==0):
+			n//=i
+			result[cnt-1][1]+=1
+	return result if n==1 else result+[[n,1]]
+
 
 class UnweightedGraph:
 	def __init__(self,vertices:int) -> None:
@@ -196,4 +208,3 @@ class StringGrid:
 			self.dfs(i,j+1,False,False)
 			self.dfs(i+1,j,False,False)
 			self.dfs(i,j-1,False,False)
-
