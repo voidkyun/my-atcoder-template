@@ -207,4 +207,3 @@ class StringGrid:
 			self.dfs(i,j+1,False,False)
 			self.dfs(i+1,j,False,False)
 			self.dfs(i,j-1,False,False)
-
