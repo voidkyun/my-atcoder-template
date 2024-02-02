@@ -45,6 +45,18 @@ n=12のとき　[[2,2],[3,1]]
 ## UnweightedGraph
 ### method
 - add グラフに辺を追加
-- bfs 特定の頂点から幅優先探索を行う。UnweightedGraph.statusに結果を代入する
-- dfs 特定の頂点から深さ優先探索を行う。UnweightedGraph.statusに結果を代入する。UnweightedGraph.passedには通った順に頂点の番号が代入される。
+- bfs　特定の頂点から幅優先探索を行う。UnweightedGraph.statusに結果を代入する
+- dfs　特定の頂点から深さ優先探索を行う。UnweightedGraph.statusに結果を代入する。UnweightedGraph.passedには通った順に頂点の番号が代入される。
 - enumerate_long_paths‎　特定の頂点から始まり、これ以上進めなくなった頂点で終了するパスを列挙する
+- connected_components　グラフの連結成分を列挙する
+- connected　グラフが連結かどうかをboolで返す
+- ispathgraph　グラフがパスグラフであるかどうかをboolで返す
+## WeightedGraph
+### method
+- add グラフに辺を追加
+- dijkstra ダイクストラ法を用いて最短経路を求める。
+## StringGrid
+### method
+- mazeify　グリッドを迷路として定義する。塀となる文字列と道となる文字列を指定する。
+- bfs　特定のマスから幅優先探索を行う。UnweightedGraph.statusに結果を代入する。
+- dfs　特定のマスから深さ優先探索を行う。UnweightedGraph.statusに結果を代入する。UnweightedGraph.passedには通った順に頂点の番号が代入される。
