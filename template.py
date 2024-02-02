@@ -13,9 +13,11 @@ def int_grid_input(h:int,w:int,edge=None):
 		return [[edge]*(w+2)]+[[edge]+list(map(int,input().split()))+[edge] for _ in range(h)]+[[edge]*(w+2)]
 def str_grid_input(h:int,w:int,edge=None):
 	if edge is None:
-		return [input() for _ in range(h)]
+		grid=StringGrid(h,w,[input() for _ in range(h)])
+		return grid
 	else:
-		return [edge*(w+2)]+[edge+input()+edge for _ in range(h)]+[edge*(w+2)]
+		grid=StringGrid(h+2,w+2,[edge*(w+2)]+[edge+input()+edge for _ in range(h)]+[edge*(w+2)])
+		return grid
 def unweighted_graph_input(n,m,directed=False):
 	g=UnweightedGraph(n)
 	for _ in range(m):
@@ -43,6 +45,22 @@ class UnweightedGraph:
 		self.edges+=1
 		self.graph[u].append(v)
 		if not directed: self.graph[v].append(u)
+	def bfs(self,s:int,initializestatus=False):
+		if initializestatus:
+			self.status=[False for _ in range(self.vertices+1)]
+		queue=collections.deque()
+		queue.append(s)
+		self.status[s]=True
+		result=[math.inf for _ in range(self.vertices+1)]
+		result[s]=0
+		while(len(queue)>0):
+			i=queue.pop()
+			for j in self.graph[i]:
+				if not self.status[j]:
+					self.status[j]=True
+					result[j]=result[i]+1
+					queue.appendleft(j)
+		return result
 	def dfs(self,n:int,initializestatus=False,isfirst=True):
 		if initializestatus:
 			self.status=[False for _ in range(self.vertices+1)]
@@ -128,4 +146,54 @@ class WeightedGraph:
 				if self.status[t]:
 					break
 		return(result)
+class StringGrid:
+	def __init__(self,height:int,width:int,grid:list) -> None:
+		self.grid=grid
+		self.height=height
+		self.width=width
+		self.status=[[False for _ in range(self.width)] for _ in range(self.height)]
+		self.ismaze=False
+	def mazeify(self,pathchar:str,wallchar:str):
+		self.pathchar=pathchar
+		self.wallchar=wallchar
+		self.ismaze=True
+	def bfs(self,si:int,sj:int,initializestatus=False):
+		if initializestatus:
+			self.status=[[False for _ in range(self.width)] for _ in range(self.height)]
+		queue=collections.deque()
+		queue.append([si,sj])
+		self.status[si][sj]=True
+		result=[[math.inf for _ in range(self.width+2)] for _ in range(self.height+2)]
+		result[si][sj]=0
+		while(len(queue)>0):
+			i,j=queue.pop()
+			if not(self.status[i-1][j]) and self.grid[i-1][j]==self.pathchar:
+				self.status[i-1][j]=True
+				result[i-1][j]=result[i][j]+1
+				queue.appendleft([i-1,j])
+			if not(self.status[i][j+1]) and self.grid[i][j+1]==self.pathchar:
+				self.status[i][j+1]=True
+				result[i][j+1]=result[i][j]+1
+				queue.appendleft([i,j+1])
+			if not(self.status[i+1][j]) and self.grid[i+1][j]==self.pathchar:
+				self.status[i+1][j]=True
+				result[i+1][j]=result[i][j]+1
+				queue.appendleft([i+1,j])
+			if not(self.status[i][j-1]) and self.grid[i][j-1]==self.pathchar:
+				self.status[i][j-1]=True
+				result[i][j-1]=result[i][j]+1
+				queue.appendleft([i,j-1])
+		return result
+	def dfs(self,i:int,j:int,initializestatus=False,isfirst=True):
+		if initializestatus:
+			self.status=[[False for _ in range(self.width)] for _ in range(self.height)]
+		if isfirst:
+			self.passed=[]
+		if not(self.status[i][j]) and self.grid[i][j]==self.pathchar:
+			self.status[i][j]=True
+			self.passed.append([i,j])
+			self.dfs(i-1,j,False,False)
+			self.dfs(i,j+1,False,False)
+			self.dfs(i+1,j,False,False)
+			self.dfs(i,j-1,False,False)
 
