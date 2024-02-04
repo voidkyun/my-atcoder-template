@@ -178,19 +178,19 @@ class StringGrid:
 		result[si][sj]=0
 		while(len(queue)>0):
 			i,j=queue.pop()
-			if not(self.status[i-1][j]) and self.grid[i-1][j]==self.pathchar:
+			if not(self.status[i-1][j]) and self.grid[i-1][j] in self.pathchar:
 				self.status[i-1][j]=True
 				result[i-1][j]=result[i][j]+1
 				queue.appendleft([i-1,j])
-			if not(self.status[i][j+1]) and self.grid[i][j+1]==self.pathchar:
+			if not(self.status[i][j+1]) and self.grid[i][j+1] in self.pathchar:
 				self.status[i][j+1]=True
 				result[i][j+1]=result[i][j]+1
 				queue.appendleft([i,j+1])
-			if not(self.status[i+1][j]) and self.grid[i+1][j]==self.pathchar:
+			if not(self.status[i+1][j]) and self.grid[i+1][j] in self.pathchar:
 				self.status[i+1][j]=True
 				result[i+1][j]=result[i][j]+1
 				queue.appendleft([i+1,j])
-			if not(self.status[i][j-1]) and self.grid[i][j-1]==self.pathchar:
+			if not(self.status[i][j-1]) and self.grid[i][j-1] in self.pathchar:
 				self.status[i][j-1]=True
 				result[i][j-1]=result[i][j]+1
 				queue.appendleft([i,j-1])
@@ -200,10 +200,11 @@ class StringGrid:
 			self.status=[[False for _ in range(self.width)] for _ in range(self.height)]
 		if isfirst:
 			self.passed=[]
-		if not(self.status[i][j]) and self.grid[i][j]==self.pathchar:
+		if not(self.status[i][j]) and self.grid[i][j] in self.pathchar:
 			self.status[i][j]=True
 			self.passed.append([i,j])
 			self.dfs(i-1,j,False,False)
 			self.dfs(i,j+1,False,False)
 			self.dfs(i+1,j,False,False)
 			self.dfs(i,j-1,False,False)
+
