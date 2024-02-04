@@ -64,11 +64,13 @@ class UnweightedGraph:
 		self.status[s]=True
 		result=[math.inf for _ in range(self.vertices+1)]
 		result[s]=0
+		self.passed=[]
 		while(len(queue)>0):
 			i=queue.pop()
 			for j in self.graph[i]:
 				if not self.status[j]:
 					self.status[j]=True
+					self.passed.append(j)
 					result[j]=result[i]+1
 					queue.appendleft(j)
 		return result

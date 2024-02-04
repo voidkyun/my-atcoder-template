@@ -1,9 +1,9 @@
 # my-atcoder-template
 
 ## function
-### int_line_input‎
+### int_line_input
 1行の空白区切りの整数を入力　例：`0 1 2 3`
-### int_list_input‎
+### int_list_input
 縦並びの複数の配列を入力
 <br>例：
 ```
@@ -45,9 +45,9 @@ n=12のとき　[[2,2],[3,1]]
 ## UnweightedGraph
 ### method
 - add グラフに辺を追加
-- bfs　特定の頂点から幅優先探索を行う。各頂点への最短経路のリストを返す。UnweightedGraph.statusに結果を代入する。
+- bfs　特定の頂点から幅優先探索を行う。各頂点への最短経路のリストを返す。UnweightedGraph.statusに結果を代入する。UnweightedGraph.passedには通った順に頂点の番号が代入される。
 - dfs　特定の頂点から深さ優先探索を行う。UnweightedGraph.statusに結果を代入する。UnweightedGraph.passedには通った順に頂点の番号が代入される。
-- enumerate_long_paths‎　特定の頂点から始まり、これ以上進めなくなった頂点で終了するパスを列挙する
+- enumerate_long_paths　特定の頂点から始まり、これ以上進めなくなった頂点で終了するパスを列挙する
 - connected_components　グラフの連結成分を列挙する
 - connected　グラフが連結かどうかをboolで返す
 - ispathgraph　グラフがパスグラフであるかどうかをboolで返す
