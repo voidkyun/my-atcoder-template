@@ -111,6 +111,18 @@ class UnweightedGraph:
 				result.status.append(status.copy())
 		search(self,s,status,path,result)
 		return result
+	def find_hamiltonian_path(self,s:int):
+		longpath=self.enumerate_long_paths(s)
+		class hamiltonian_path():
+			def __init__(self) -> None:
+				self.cnt=0
+				self.paths=[]
+		result=hamiltonian_path()
+		for i in range(longpath.cnt):
+			if not False in longpath.status[i]:
+				result.cnt+=1
+				result.paths.append(longpath.paths[i])
+		return(result)
 	def connected_components(self):
 		components=[]
 		for i in range(1,self.vertices+1):
