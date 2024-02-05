@@ -48,7 +48,9 @@ n=12のとき　[[2,2],[3,1]]
 - bfs　特定の頂点から幅優先探索を行う。各頂点への最短経路のリストを返す。UnweightedGraph.statusに結果を代入する。UnweightedGraph.passedには通った順に頂点の番号が代入される。
 - dfs　特定の頂点から深さ優先探索を行う。UnweightedGraph.statusに結果を代入する。UnweightedGraph.passedには通った順に頂点の番号が代入される。
 - enumerate_long_paths　特定の頂点から始まり、これ以上進めなくなった頂点で終了するパスを列挙する。long_path_resultクラスを返す。
-- find_hamiltonian_path　ハミルトン路を探す。hamiltonian_pathクラスを返す。
+- find_hamiltonian_path　特定の頂点から始まるハミルトン路を列挙する。グラフがハミルトン路を持つ場合はhamiltonian_pathクラスを、持たない場合はNoneを返す。
+- exist_eulerian_path　グラフがオイラー路を持つ場合は`[True,[始点の候補1,始点の候補2]]`を、持たない場合は`[False,None]`を返す。
+- find_eulerian_path　オイラー路を一つ探し、通る順番に頂点番号を代入したリストを返す。グラフがオイラー路を持たない場合はNoneを返す。
 - connected_components　グラフの連結成分を列挙する
 - connected　グラフが連結かどうかをboolで返す
 - ispathgraph　グラフがパスグラフであるかどうかをboolで返す

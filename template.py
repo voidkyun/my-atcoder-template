@@ -52,10 +52,14 @@ class UnweightedGraph:
 		self.edges=0
 		self.graph=[[] for _ in range(vertices+1)]
 		self.status=[False for _ in range(vertices+1)]
+		self.adjacency_matrix=[[0 for _ in range(vertices)+1] for _ in range(vertices+1)]
 	def add(self,u:int,v:int,directed=False):
 		self.edges+=1
 		self.graph[u].append(v)
-		if not directed: self.graph[v].append(u)
+		self.adjacency_matrix[u][v]+=1
+		if not directed:
+			self.graph[v].append(u)
+			self.adjacency_matrix[v][u]+=1
 	def bfs(self,s:int,initializestatus=False):
 		if initializestatus:
 			self.status=[False for _ in range(self.vertices+1)]
@@ -122,7 +126,33 @@ class UnweightedGraph:
 			if not False in longpath.status[i]:
 				result.cnt+=1
 				result.paths.append(longpath.paths[i])
-		return(result)
+		return(result if result.cnt>0 else None)
+	def exist_eulerian_path(self):
+		cnt=0
+		start=[]
+		for i in range(1,self.vertices+1):
+			if len(self.graph[i])%2==1:
+				start.append(i)
+				cnt+=1
+		return [True,start] if cnt==2 else [False,None]
+	def find_eulerian_path(self):
+		exist_eulerian_path=self.exist_eulerian_path()
+		if exist_eulerian_path[0]:
+			start=exist_eulerian_path[1][0]
+			end=exist_eulerian_path[1][1]
+			path=collections.deque()
+			def search(self:UnweightedGraph,u:int,path:collections.deque):
+				for v in range(1,self.vertices+1):
+					if self.adjacency_matrix[u][v]>0:
+						self.adjacency_matrix[u][v]-=1
+						if self.adjacency_matrix[v][u]>0:
+							self.adjacency_matrix[v][u]-=1
+						search(self,v,path)
+				path.appendleft(u)
+			search(self,start,path)
+			return path
+		else:
+			return None
 	def connected_components(self):
 		components=[]
 		for i in range(1,self.vertices+1):
