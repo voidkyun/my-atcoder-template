@@ -125,7 +125,7 @@ class UnweightedGraph:
 				self.paths=[]
 		result=hamiltonian_path()
 		for i in range(longpath.cnt):
-			if not False in longpath.status[i]:
+			if not False in longpath.status[i][1:]:
 				result.cnt+=1
 				result.paths.append(longpath.paths[i])
 		return(result if result.cnt>0 else None)
@@ -257,6 +257,3 @@ class StringGrid:
 			self.dfs(i+1,j,False,False)
 			self.dfs(i,j-1,False,False)
 
-n,m=int_line_input()
-g=unweighted_graph_input(n,m)
-print(g.find_eulerian_path())
