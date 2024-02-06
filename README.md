@@ -45,6 +45,7 @@ n=12のとき　[[2,2],[3,1]]
 ## UnweightedGraph
 ### method
 - add グラフに辺を追加
+- generate_adjacency_matrix　グラフの隣接行列を作り、UnweightedGraph.adjacency_matrixに代入する。
 - bfs　特定の頂点から幅優先探索を行う。各頂点への最短経路のリストを返す。UnweightedGraph.statusに結果を代入する。UnweightedGraph.passedには通った順に頂点の番号が代入される。
 - dfs　特定の頂点から深さ優先探索を行う。UnweightedGraph.statusに結果を代入する。UnweightedGraph.passedには通った順に頂点の番号が代入される。
 - enumerate_long_paths　特定の頂点から始まり、これ以上進めなくなった頂点で終了するパスを列挙する。long_path_resultクラスを返す。
