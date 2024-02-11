@@ -41,6 +41,7 @@ WeightedGraphクラスを返す
 <br>返値：
 ```
 n=12のとき　[[2,2],[3,1]]
+n=60のとき　[[2, 2], [3, 1], [5, 1]]
 ```
 ## UnweightedGraph
 ### method
