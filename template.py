@@ -1,4 +1,4 @@
-import sys,math,itertools,re,numpy,string,heapq,collections
+import sys,math,itertools,re,numpy,string,heapq,collections,functools
 
 sys.setrecursionlimit(10**9)
 
@@ -184,9 +184,11 @@ class WeightedGraph:
 		self.vertices=vertices
 		self.edges=0
 		self.graph=[[] for _ in range(vertices+1)]
+		self.edgelist=[]
 		self.status=[False for _ in range(self.vertices+1)]
 	def add(self,u:int,v:int,w:int,directed=False):
 		self.edges+=1
+		self.edgelist.append([u,v,w,directed])
 		self.graph[u].append([v,w])
 		if not directed: self.graph[v].append([u,w])
 	def dijkstra(self,s:int,t=None):
@@ -206,6 +208,18 @@ class WeightedGraph:
 				if self.status[t]:
 					break
 		return(result)
+	def bellmanford(self,s:int):
+		result=[math.inf for _ in range(self.vertices+1)]
+		result[s]=0
+		for _ in range(self.edges-1):
+			for u,v,w,directed in self.edgelist:
+				if not(directed):return(None)
+				result[v]=min(result[v],result[u]+w)		
+		for u,v,w,directed in self.edgelist:
+			if result[u]+w<result[v]:
+				return(None)
+		else:
+			return(result)
 class StringGrid:
 	def __init__(self,height:int,width:int,grid:list) -> None:
 		self.grid=grid
