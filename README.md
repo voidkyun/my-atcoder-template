@@ -56,6 +56,7 @@ n=60のとき　[[2, 2], [3, 1], [5, 1]]
 - connected_components　グラフの連結成分を列挙する
 - connected　グラフが連結かどうかをboolで返す
 - ispathgraph　グラフがパスグラフであるかどうかをboolで返す
+- isbipartitegraph　グラフが2部グラフであるかどうかをboolで返す
 ## WeightedGraph
 ### method
 - add グラフに辺を追加

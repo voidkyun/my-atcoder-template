@@ -52,6 +52,7 @@ class UnweightedGraph:
 		self.edges=0
 		self.graph=[[] for _ in range(vertices+1)]
 		self.status=[False for _ in range(vertices+1)]
+		self.bipresult=True
 	def add(self,u:int,v:int,directed=False):
 		self.edges+=1
 		self.graph[u].append(v)
@@ -168,6 +169,23 @@ class UnweightedGraph:
 				self.dfs(i)
 				components.append(self.passed)
 		return components
+	def isbipartitegraph(self):
+		status=[0 for _ in range(self.vertices+1)]
+		def dfs(self:UnweightedGraph,num:int,p:int):
+			if status[num]==-p:
+				self.bipresult=False
+			elif status[num]==0:
+				status[num]=p
+				for i in self.graph[num]:
+					dfs(self,i,-p)
+		for i in range(1,self.vertices+1):
+			if not self.bipresult:
+				break
+			if i==1:
+				dfs(self,i,1)
+			if status[i]==0:
+				dfs(self,i,1)
+		return self.bipresult
 	def connected(self):
 		self.dfs(1,True)
 		return not(False in self.status[1:])
