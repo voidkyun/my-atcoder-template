@@ -197,6 +197,28 @@ class UnweightedGraph:
 		else:
 			degree_para=True
 		return(self.edges==self.vertices-1 and degree_para and self.connected())
+	def diameter(self):
+		class DMStatus:
+			def __init__(self,ug:UnweightedGraph) -> None:
+				self.depth=0
+				self.path=[]
+				self.status=[]
+		dmstatus=DMStatus(self)
+		def search(self:UnweightedGraph,n:int,d:int,_path:list):
+			if not(dmstatus.status[n]):
+				if dmstatus.depth<d:
+					dmstatus.depth=d
+					dmstatus.path=_path
+				dmstatus.status[n]=True
+				for i in self.graph[n]:
+					search(self,i,d+1,_path+[i])
+		dmstatus.depth=0
+		dmstatus.status=[False for _ in range(self.vertices+1)]
+		search(self,1,0,[1])
+		dmstatus.depth=0
+		dmstatus.status=[False for _ in range(self.vertices+1)]
+		search(self,dmstatus.path[-1],0,[dmstatus.path[-1]])
+		return dmstatus.depth
 class WeightedGraph:
 	def __init__(self,vertices:int) -> None:
 		self.vertices=vertices

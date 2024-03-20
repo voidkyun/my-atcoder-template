@@ -57,6 +57,7 @@ n=60のとき　[[2, 2], [3, 1], [5, 1]]
 - connected　グラフが連結かどうかをboolで返す
 - ispathgraph　グラフがパスグラフであるかどうかをboolで返す
 - isbipartitegraph　グラフが2部グラフであるかどうかをboolで返す
+- diameter　グラフが木であるとき、グラフの直径を返す
 ## WeightedGraph
 ### method
 - add グラフに辺を追加
